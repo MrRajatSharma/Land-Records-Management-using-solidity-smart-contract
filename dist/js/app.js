@@ -2,7 +2,7 @@ App = {
 	web3Provider: null,
 	contracts: {
         owner: "0x17e336990AA131ab1498FfFF928dAAA0BCcD9fDA",
-        address: "0x7DDbaF99B5e8b6e52F745f84C303364e731BEc24",
+        address: "0x5d73aED1d434075FACdaB3E7D457fEb06eEE7398",
 		ABI: [
 			{
 				"constant": false,
@@ -292,7 +292,7 @@ App = {
 					},
 					{
 						"name": "",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
 				"payable": false,
@@ -312,6 +312,41 @@ App = {
 					{
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "khataNo",
+						"type": "uint256"
+					},
+					{
+						"name": "khewatNo",
+						"type": "uint256"
+					},
+					{
+						"name": "plotNo",
+						"type": "uint256"
+					}
+				],
+				"name": "getUserDetailsByKKP",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
 					}
 				],
 				"payable": false,
@@ -596,6 +631,7 @@ App = {
 		$(document).on('click', '#addProperty', App.createProperty);
 		$(document).on('click', '#transfer', App.transfer);
 		$(document).on('click', '#logout', App.logout);
+		$(document).on('click', '.viewUserDetails', App.getUserDetails);
 		$(document).on('click', '.sell', App.showAddToSellingModal);
 		$(document).on('click', '.rmsell', App.removeFromselling);
 		$(document).on('click', '#search', App.search);
@@ -704,6 +740,29 @@ App = {
 			}
 		});
 	},
+	getUserDetails(event) {
+		event.preventDefault();
+		const khata = $(this).data("khata");
+		const khewat = $(this).data("khewat");
+		const plot = $(this).data("plot");
+		console.log(khata, khewat, plot);
+
+		// fetch user details
+		App.contracts.asset.methods.getUserDetailsByKKP(khata, khewat, plot).call(function (error, result) {
+			if (!error) {
+				console.log('res', result);
+				$("#userDetailsModal").modal("show");
+				$("#name").html(result[0]);
+				$("#email").html(result[1]);
+				$("#number").html(result[2]);
+			}
+			else {
+				console.error('err', error);
+				alert("Error");
+			}
+		});
+
+	},
 	addForselling(event) {
 		event.preventDefault();
 		const aadhar = sessionStorage.aadhar;
@@ -770,8 +829,11 @@ App = {
 		App.contracts.asset.methods.getCountOfPropertyOnSaleByArea(area).call(function (error, result) {
 			if (!error) {
 				for (let i = 0; i < result; i++) {
+					$("#searchTBody").html("");
+
 					App.contracts.asset.methods.getPropertyOnSaleByArea(area, i).call(function (error, property) {
 						// add to html
+						console.log(property);
 						$("#searchTBody").append(
 							`<tr>
 								<td>${i + 1}</td>
@@ -783,7 +845,7 @@ App = {
 								<td>${property["5"]}</td>
 								<td>${property["6"]}</td>
 								<td>${property["7"]}</td>
-								<td><button class="btn btn-success buy"}" data-index="${i}">Buy</button></td>
+								<td><button class="btn btn-success viewUserDetails" data-index="${i}" data-khata="${property[0]}" data-khewat="${property[1]}" data-plot="${property[2]}">View User details</button></td>
 							</tr>`
 						)
 					});

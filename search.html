@@ -17,6 +17,50 @@
 
 <body class="bg-light">
 
+    <!-- Modal -->
+    <div class="modal fade" id="userDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">User Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Name
+                        </div>
+                        <div class="col-md-6" id="name">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            Email
+                        </div>
+                        <div class="col-md-6" id="email">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            Contact Number
+                        </div>
+                        <div class="col-md-6" id="number">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08"
             aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,8 +131,8 @@
                             <th scope="col">Address</th>
                             <th scope="col">State code</th>
                             <th scope="col">Zip</th>
-                            <th scope="col">Area</th>
                             <th scope="col">Size</th>
+                            <th scope="col">Price</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>

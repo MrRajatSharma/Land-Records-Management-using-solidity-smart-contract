@@ -97,6 +97,15 @@ contract LandRecord {
         return count;
     }
     
+    function getUserDetailsByKKP(uint khataNo, uint khewatNo, uint plotNo) returns (string, string, string) {
+        for (uint i = 0; i < properties.length; i++) {
+            if (khataNo == properties[i].khataNo && khewatNo == properties[i].khewatNo && plotNo == properties[i].plotNo) {
+                User user = users[properties[i].aadhar];
+                return (user.name, user.email, user.contactNumber);
+            }
+        }
+    }
+    
     function getPropertyOnSaleByArea(string area, uint index) returns (
         uint,
 		uint,
@@ -105,7 +114,7 @@ contract LandRecord {
 		string,
 		string,
 		string,
-		string
+		uint
 	){
         uint length = properties.length;
         uint count = 0;
@@ -113,7 +122,7 @@ contract LandRecord {
             if (properties[i].value != 0 && stringsEqual(properties[i].area, area)) {
                 if (count == i) {
                     PropertyDetail pd = properties[i];
-                    return (pd.khataNo, pd.khewatNo, pd.plotNo, pd.fullAddress, pd.state, pd.zip, pd.area, pd.size);
+                    return (pd.khataNo, pd.khewatNo, pd.plotNo, pd.fullAddress, pd.state, pd.zip, pd.size, pd.value);
                 }
                 count++;
             }
