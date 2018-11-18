@@ -2,7 +2,7 @@ App = {
 	web3Provider: null,
 	contracts: {
         owner: "0x17e336990AA131ab1498FfFF928dAAA0BCcD9fDA",
-        address: "0x5d73aED1d434075FACdaB3E7D457fEb06eEE7398",
+        address: "0xF077B4464824c753CaE07475fCb0584F7CE49a10",
 		ABI: [
 			{
 				"constant": false,
@@ -88,6 +88,20 @@ App = {
 					{
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "getCountOfPropertyOnSale",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"payable": false,
@@ -239,6 +253,53 @@ App = {
 				],
 				"name": "getPropertyCountByArea",
 				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "getPropertyOnSale",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
 					{
 						"name": "",
 						"type": "uint256"
@@ -903,6 +964,35 @@ App = {
             });
 		});
 
+	},
+	getAllSellingProperties() {
+		App.contracts.asset.methods.getCountOfPropertyOnSale().call(function (error, result) {
+			if (!error) {
+				for (let i = 0; i < result; i++) {
+					App.contracts.asset.methods.getPropertyOnSale(i).call(function (error, property) {
+						// add to html
+						console.log(property);
+						$("#tBody").append(
+							`<tr>
+								<td>${i + 1}</td>
+								<td>${property["0"]}</td>
+								<td>${property["1"]}</td>
+								<td>${property["2"]}</td>
+								<td>${property["3"]}</td>
+								<td>${property["4"]}</td>
+								<td>${property["5"]}</td>
+								<td>${property["6"]}</td>
+								<td>${property["7"]}</td>
+							</tr>`
+						)
+					});
+				}
+				console.log('getCountOfPropertyOnSaleByArea res', result);
+			}
+			else {
+				console.error('getCountOfPropertyOnSaleByArea err', error);
+			}
+		});
 	},
 	getMyProperties() {
 		var aadhar = sessionStorage.aadhar;

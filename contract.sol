@@ -86,6 +86,40 @@ contract LandRecord {
         return count;
     }
     
+    function getCountOfPropertyOnSale() returns (uint) {
+        uint length = properties.length;
+        uint count = 0;
+        for (uint i = 0; i < length; i++) {
+            if (properties[i].value != 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    function getPropertyOnSale(uint index) returns (
+        uint,
+		uint,
+		uint,
+		string,
+		string,
+		string,
+		string,
+		uint
+	){
+        uint length = properties.length;
+        uint count = 0;
+        for (uint i = 0; i < length; i++) {
+            if (properties[i].value != 0) {
+                if (count == i) {
+                    PropertyDetail pd = properties[i];
+                    return (pd.khataNo, pd.khewatNo, pd.plotNo, pd.fullAddress, pd.state, pd.area, pd.size, pd.value);
+                }
+                count++;
+            }
+        }
+    }
+    
     function getCountOfPropertyOnSaleByArea(string area) returns (uint) {
         uint length = properties.length;
         uint count = 0;
@@ -105,6 +139,7 @@ contract LandRecord {
             }
         }
     }
+    
     
     function getPropertyOnSaleByArea(string area, uint index) returns (
         uint,
