@@ -2,7 +2,7 @@ App = {
 	web3Provider: null,
 	contracts: {
         owner: "0x17e336990AA131ab1498FfFF928dAAA0BCcD9fDA",
-        address: "0x6122bDEa2d7b7BDE6b19C5BBEDd2dC1A37409C99",
+        address: "0x7DDbaF99B5e8b6e52F745f84C303364e731BEc24",
 		ABI: [
 			{
 				"constant": false,
@@ -52,18 +52,18 @@ App = {
 					},
 					{
 						"name": "khataNo",
-						"type": "int256"
+						"type": "uint256"
 					},
 					{
 						"name": "khewatNo",
-						"type": "int256"
+						"type": "uint256"
+					},
+					{
+						"name": "plotNo",
+						"type": "uint256"
 					},
 					{
 						"name": "fullAddress",
-						"type": "string"
-					},
-					{
-						"name": "landmark",
 						"type": "string"
 					},
 					{
@@ -75,8 +75,12 @@ App = {
 						"type": "string"
 					},
 					{
-						"name": "value",
-						"type": "uint256"
+						"name": "area",
+						"type": "string"
+					},
+					{
+						"name": "size",
+						"type": "string"
 					}
 				],
 				"name": "addProperty",
@@ -84,6 +88,86 @@ App = {
 					{
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "area",
+						"type": "string"
+					}
+				],
+				"name": "getCountOfPropertyOnSaleByArea",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "getPropertiesCount",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "getProperty",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
 					}
 				],
 				"payable": false,
@@ -102,15 +186,23 @@ App = {
 						"type": "uint256"
 					}
 				],
-				"name": "getProperty",
+				"name": "getPropertyByAadhar",
 				"outputs": [
 					{
 						"name": "",
-						"type": "int256"
+						"type": "uint256"
 					},
 					{
 						"name": "",
-						"type": "int256"
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "string"
 					},
 					{
 						"name": "",
@@ -131,6 +223,76 @@ App = {
 					{
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "area",
+						"type": "string"
+					}
+				],
+				"name": "getPropertyCountByArea",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "area",
+						"type": "string"
+					},
+					{
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "getPropertyOnSaleByArea",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
 					}
 				],
 				"payable": false,
@@ -206,6 +368,33 @@ App = {
 				"constant": false,
 				"inputs": [
 					{
+						"name": "aadhar",
+						"type": "uint256"
+					},
+					{
+						"name": "index",
+						"type": "uint256"
+					},
+					{
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "setUserPropertyOnSale",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
 						"name": "sender",
 						"type": "uint256"
 					},
@@ -260,18 +449,18 @@ App = {
 					},
 					{
 						"name": "khataNo",
-						"type": "int256"
+						"type": "uint256"
 					},
 					{
 						"name": "khewatNo",
-						"type": "int256"
+						"type": "uint256"
+					},
+					{
+						"name": "plotNo",
+						"type": "uint256"
 					},
 					{
 						"name": "fullAddress",
-						"type": "string"
-					},
-					{
-						"name": "landmark",
 						"type": "string"
 					},
 					{
@@ -280,6 +469,14 @@ App = {
 					},
 					{
 						"name": "zip",
+						"type": "string"
+					},
+					{
+						"name": "area",
+						"type": "string"
+					},
+					{
+						"name": "size",
 						"type": "string"
 					},
 					{
@@ -398,12 +595,12 @@ App = {
 	bindEvents: function () {
 		$(document).on('click', '#addProperty', App.createProperty);
 		$(document).on('click', '#transfer', App.transfer);
-		$(document).on('click', '#btn-PropReject', App.rejectProperty);
-		$(document).on('click', '#btn-PropReqChange', App.reqchangeOwnership);
-		$(document).on('click', '#btn-PropAcptChange', App.approveChangeOwnership);
-		$(document).on('click', '#btn-PropValChange', App.changeValue);
-		$(document).on('click', '#btn-PropSearch', App.getPropertyDetails);
-		$(document).on('click', '#btn-PropAddUser', App.adduser);
+		$(document).on('click', '#logout', App.logout);
+		$(document).on('click', '.sell', App.showAddToSellingModal);
+		$(document).on('click', '.rmsell', App.removeFromselling);
+		$(document).on('click', '#search', App.search);
+		$(document).on('click', '#sellModalSaveBtn', App.addForselling);
+		$(document).on('click', '#addUser', App.addUser);
 		$(document).on('click', '#login', App.login);
 	},
 
@@ -414,103 +611,31 @@ App = {
 		var khewatNo = $('#khewatNo').val();
 		var address = $('#address').val();
 		var state = $('#state').val();
-		var landmark = $('#landmark').val();
+		var plotNo = $('#plotNo').val();
 		var zip = $('#zip').val();
 		var area = $('#area').val();
+		var size = $('#size').val();
 		var aadhar = sessionStorage.aadhar;
 
-		console.log(aadhar, khataNo, khewatNo, address, landmark, state, zip, area);
+		if (!sessionStorage.aadhar) {
+            alert("Please login");
+			location.href = "login.html";
+
+			return;
+		}
+		  
+		console.log(aadhar, khataNo, khewatNo, plotNo, address, state, zip, area, size);
 		web3.eth.getAccounts(function (error, accounts) {
 			if (error) {
 				console.log(error);
 				return;
 			}
 
-			App.contracts.asset.methods.addProperty(parseInt(aadhar), parseInt(khataNo), parseInt(khewatNo), address, landmark, state, zip, 0, area).send({from: App.contracts.owner, gas: 3000000}, function (error, result) {
-				if (!error)
+			App.contracts.asset.methods.addProperty(parseInt(aadhar), parseInt(khataNo), parseInt(khewatNo), parseInt(plotNo), address, state, zip, area, size).send({from: App.contracts.owner, gas: 3000000}, function (error, result) {
+				if (!error) {
+					alert("Property added");
 					console.log(result);
-				else
-					console.error(error);
-			});
-		});
-
-	},
-	approveProperty: function (event) {
-		event.preventDefault();
-		var PropId = $('#PropSearchform #PropSearch').val();
-		web3.eth.getAccounts(function (error, accounts) {
-			if (error) {
-				console.log(error);
-			}
-			App.contracts.asset.methods.approveProperty(PropId, { gas: 1000000, gasPrice: web3.toWei(20, 'gwei') }, function (error, result) {
-				if (!error)
-					console.log(JSON.stringify(result));
-				else
-					console.error(error);
-			});
-		});
-
-	},
-	rejectProperty: function (event) {
-		event.preventDefault();
-		var PropId = $('#PropSearchform #PropSearch').val();
-		web3.eth.getAccounts(function (error, accounts) {
-			if (error) {
-				console.log(error);
-			}
-			App.contracts.asset.rejectProperty(PropId, { gas: 1000000, gasPrice: web3.toWei(20, 'gwei') }, function (error, result) {
-				if (!error)
-					console.log(JSON.stringify(result));
-				else
-					console.error(error);
-			});
-		});
-
-	},
-	reqchangeOwnership: function (event) {
-		event.preventDefault();
-		var PropId = $('#PropSearchform #PropSearch').val();
-		var NewOwner = $('#PropReqChangeform #PropReqChange').val();
-		web3.eth.getAccounts(function (error, accounts) {
-			if (error) {
-				console.log(error);
-			}
-			App.contracts.asset.changeOwnership(PropId, NewOwner, { gas: 1000000, gasPrice: web3.toWei(20, 'gwei') }, function (error, result) {
-				if (!error)
-					console.log(JSON.stringify(result));
-				else
-					console.error(error);
-			});
-		});
-
-	},
-	approveChangeOwnership: function (event) {
-		event.preventDefault();
-		var PropId = $('#PropSearchform #PropSearch').val();
-		web3.eth.getAccounts(function (error, accounts) {
-			if (error) {
-				console.log(error);
-			}
-			App.contracts.asset.approveChangeOwnership(PropId, { gas: 1000000, gasPrice: web3.toWei(20, 'gwei') }, function (error, result) {
-				if (!error)
-					console.log(JSON.stringify(result));
-				else
-					console.error(error);
-			});
-		});
-
-	},
-	changeValue: function (event) {
-		event.preventDefault();
-		var PropId = $('#PropSearchform #PropSearch').val();
-		var NewVal = $('#PropValChangeform #PropValChange').val();
-		web3.eth.getAccounts(function (error, accounts) {
-			if (error) {
-				console.log(error);
-			}
-			App.contracts.asset.changeValue(PropId, NewVal, { gas: 1000000, gasPrice: web3.toWei(20, 'gwei') }, function (error, result) {
-				if (!error)
-					console.log(JSON.stringify(result));
+				}
 				else
 					console.error(error);
 			});
@@ -523,7 +648,7 @@ App = {
 		var index = $("#propertyId").val();
 		var aadhar = sessionStorage.aadhar;
 		console.log(aadhar, parseInt(recipientAadhar), parseInt(index));
-		App.contracts.asset.methods.transfer(aadhar, parseInt(recipientAadhar), parseInt(index)).send({from: App.contracts.owner, gas: 300000}, function (error, result) {
+		App.contracts.asset.methods.transfer(aadhar, parseInt(recipientAadhar), parseInt(index) - 1).send({from: App.contracts.owner, gas: 300000}, function (error, result) {
 			if (!error) {
 				console.log('usersProperties res', result);
 			}
@@ -536,27 +661,75 @@ App = {
 		event.preventDefault();
         var password = $('#password').val();
         var aadharNumber = $('#aadhar').val();
-		console.log('Form', aadharNumber, password);
-		web3.eth.getAccounts(function (error, accounts) {
+		console.log('Logging in', aadharNumber, password);
+
+		App.contracts.asset.methods.login(parseInt(aadharNumber), password).call(function (error, result) {
 			if (error) {
-				console.log('Error getting account', error);
-				return;
+				alert("Wrong credentials");
+				console.error('err', error);
 			}
-            App.contracts.asset.methods.login(parseInt(aadharNumber), password).call(function (error, result) {
-                if (error) {
-					alert("Wrong credentials");
-					console.error('err', error);
-				}
-                else {
-					console.log('res', result);
-					sessionStorage.loggedIn = true;
-					sessionStorage.aadhar = aadharNumber;
-					location.href = "home.html";
-				}
-            });
+			else {
+				console.log('res', result);
+				sessionStorage.loggedIn = true;
+				sessionStorage.aadhar = aadharNumber;
+				location.href = "home.html";
+			}
 		});
 	},
-	adduser: function (event) {
+	logout: () => {
+		sessionStorage.aadhar = null;
+		location.href = "login.html";
+	},
+	showAddToSellingModal(event) {
+		event.preventDefault();
+		const index = $(this).data("index");
+		$('#exampleModalCenter').modal('show');
+		$('#exampleModalCenter').data("index", index);
+	},
+	removeFromselling(event) {
+		event.preventDefault();
+		const index = $(this).data("index");
+		const aadhar = sessionStorage.aadhar;
+		App.contracts.asset.methods.setUserPropertyOnSale(aadhar, index, 0).send({ from: App.contracts.owner, gas: 3000000 }, function (error, result) {
+			console.log('res', result);
+			
+			if (!error) {
+				console.log('res', result);
+				alert("Success");
+				location.reload();
+			}
+			else {
+				console.error('err', error);
+				alert("Error");
+			}
+		});
+	},
+	addForselling(event) {
+		event.preventDefault();
+		const aadhar = sessionStorage.aadhar;
+		const val = $("#amount").val();
+		const index = $('#exampleModalCenter').data("index");
+		if (!val || val == "" | val <= 0) {
+			alert("Please add proper input");
+			return;
+		}
+		console.log(aadhar, val, index);
+		App.contracts.asset.methods.setUserPropertyOnSale(aadhar, index, val).send({ from: App.contracts.owner, gas: 3000000 }, function (error, result) {
+			console.log('res', result);
+			
+			if (!error) {
+				console.log('res', result);
+				alert("Success");
+				location.reload();
+			}
+			else {
+				console.error('err', error);
+				alert("Error");
+			}
+		});
+
+	},
+	addUser: function (event) {
         event.preventDefault();
         var contactNumber = $('#contactNumber').val();
         var accountAddress = $('#accountAddress').val();
@@ -565,76 +738,89 @@ App = {
         var email = $('#email').val();
         var aadharNumber = $('#aadhar').val();
 		console.log('User address', contactNumber, accountAddress, password, name, email, aadharNumber);
-		web3.eth.getAccounts(function (error, accounts) {
-			if (error) {
-				console.log('Error getting account', error);
-				return;
-			}
-			console.log('Accounts', accounts);
-            App.contracts.asset.methods.addNewUser(accountAddress, name, contactNumber, email, password, parseInt(aadharNumber)).send({ from: App.contracts.owner, gas: 3000000 }, function (error, result) {
+
+		App.contracts.asset.methods.addNewUser(accountAddress, name, contactNumber, email, password, parseInt(aadharNumber)).send({ from: App.contracts.owner, gas: 3000000 }, function (error, result) {
+			console.log('res', result);
+			
+			if (!error) {
 				console.log('res', result);
-				
-				if (!error) {
-					console.log('res', result);
-					alert("Account created. Goto login page to login");
-				}
-                else {
-					console.error('err', error);
-					alert("Error creating account. Please try again");
-				}
-            });
+				alert("Account created. Goto login page to login");
+			}
+			else {
+				console.error('err', error);
+				alert("Error creating account. Please try again");
+			}
 		});
 
 	},
 	getUser(aadhar) {
-		web3.eth.getAccounts(function (error, accounts) {
-			if (error) {
-				console.log('Error getting account', error);
-				return;
+		App.contracts.asset.methods.users(aadhar).call(function (error, result) {
+			if (!error) {
+				console.log('res', result);
 			}
-			console.log('Accounts', accounts);
-            App.contracts.asset.methods.users(aadhar).call(function (error, result) {
-                if (!error) {
-					console.log('res', result);
-				}
-                else {
-					console.error('err', error);
-				}
-            });
+			else {
+				console.error('err', error);
+			}
 		});
-
 	},
-	getProperty(aadhar, index, callback) {
+	search(event) {
+		event.preventDefault();
+		const area = $("#area").val();
+		console.log(area);
+		App.contracts.asset.methods.getCountOfPropertyOnSaleByArea(area).call(function (error, result) {
+			if (!error) {
+				for (let i = 0; i < result; i++) {
+					App.contracts.asset.methods.getPropertyOnSaleByArea(area, i).call(function (error, property) {
+						// add to html
+						$("#searchTBody").append(
+							`<tr>
+								<td>${i + 1}</td>
+								<td>${property["0"]}</td>
+								<td>${property["1"]}</td>
+								<td>${property["2"]}</td>
+								<td>${property["3"]}</td>
+								<td>${property["4"]}</td>
+								<td>${property["5"]}</td>
+								<td>${property["6"]}</td>
+								<td>${property["7"]}</td>
+								<td><button class="btn btn-success buy"}" data-index="${i}">Buy</button></td>
+							</tr>`
+						)
+					});
+				}
+				console.log('getCountOfPropertyOnSaleByArea res', result);
+			}
+			else {
+				console.error('getCountOfPropertyOnSaleByArea err', error);
+			}
+		});
+	},
+	getProperty(index, callback) {		
+		App.contracts.asset.methods.getProperty(index).call(function (error, result) {
+			if (!error) {
+				console.log('getProperty res', result);
+				callback(result);
+			}
+			else {
+				console.error('getProperty err', error);
+			}
+		});
+	},
+	getPropertyByAadhar(aadhar, index, callback) {
 		web3.eth.getAccounts(function (error, accounts) {
 			if (error) {
 				console.log('Error getting account', error);
 				return;
 			}
-			App.contracts.asset.methods.getProperty(aadhar, index).call(function (error, result) {
+			App.contracts.asset.methods.getPropertyByAadhar(aadhar, index).call(function (error, result) {
                 if (!error) {
-					console.log('getProperty res', result);
+					console.log('getPropertyByAadhar res', result);
 					callback(result);
 				}
                 else {
-					console.error('getProperty err', error);
+					console.error('getPropertyByAadhar err', error);
 				}
 			});
-			// App.contracts.asset.methods.properties(index).call(function (error, result) {
-            //     if (!error) {
-			// 		console.log('properties res', result);
-			// 	}
-            //     else {
-			// 		console.error('properties err', error);
-			// 	}
-			// });
-			// App.contracts.asset.methods.usersProperties(aadhar, index).call(function (error, result) {
-            //     if (!error) {
-			// 		console.log('usersProperties res', result);
-			// 	}
-            //     else {
-			// 		console.error('usersProperties err', error);
-			// 	}
-            // });
 		});
 
 	},
@@ -656,14 +842,18 @@ App = {
 		});
 
 	},
-	getProperties() {
+	getMyProperties() {
 		var aadhar = sessionStorage.aadhar;
 		console.log("Calling getTotalProperties");
 		App.getTotalProperties(aadhar, (totalProperties) => {
 			for (let i = 0; i < totalProperties; i++) {
-				App.getProperty(aadhar, i, (property) => {
+				App.getPropertyByAadhar(aadhar, i, (property) => {
 					// add to html
-					console.log("P returned", property);
+					let sellingText = "Add for Selling";
+					if (property[8] != 0) {
+						// already on selling
+						sellingText = "Remove from Selling"
+					}
 					$("#tBody").append(
 						`<tr>
 							<td>${i + 1}</td>
@@ -673,29 +863,15 @@ App = {
 							<td>${property["3"]}</td>
 							<td>${property["4"]}</td>
 							<td>${property["5"]}</td>
+							<td>${property["6"]}</td>
 							<td>${property["7"]}</td>
+							<td><button class="btn btn-success ${property[8]!=0? "rmsell" : "sell"}" data-index="${i}">${sellingText}</button></td>
 						</tr>`
 					)
 				});
 			}
 		});
 	},
-	approveUsers: function (event) {
-		event.preventDefault();
-		var useraddress = $('#adduser #PropAddUser').val();
-		console.log('approving user', useraddress, App.contracts.owner);
-		web3.eth.getAccounts(function (error, accounts) {
-			if (error) {
-				console.log(error);
-			}
-			App.contracts.asset.methods.approveUsers(useraddress).send({ from: App.contracts.owner }, function (error, result) {
-				if (!error)
-					console.log(JSON.stringify(result));
-				else
-					console.error(error);
-			});
-		});
-	}
 };
 
 $(function () {

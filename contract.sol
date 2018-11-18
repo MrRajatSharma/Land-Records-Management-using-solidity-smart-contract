@@ -56,7 +56,7 @@ contract LandRecord {
 
     function addProperty(uint aadhar, uint khataNo, uint khewatNo, uint plotNo, string fullAddress, string state, string zip, string area, string size) public returns (bool) {
         for (uint i = 0; i<properties.length; i++){
-            if (properties[i].khataNo == khataNo && properties[i].khewatNo == khewatNo) {
+            if (properties[i].khataNo == khataNo && properties[i].khewatNo == khewatNo && properties[i].plotNo == plotNo) {
                 return false;
             }
         }
@@ -149,11 +149,12 @@ contract LandRecord {
 		string,
 		string,
 		string,
-		string
+		string,
+		uint
 	){
         uint propertyIndex = usersProperties[aadhar][index];
         PropertyDetail pd = properties[propertyIndex - 1];
-        return (pd.khataNo, pd.khewatNo, pd.plotNo, pd.fullAddress, pd.state, pd.zip, pd.area, pd.size);
+        return (pd.khataNo, pd.khewatNo, pd.plotNo, pd.fullAddress, pd.state, pd.zip, pd.area, pd.size, pd.value);
     }
     
 	// Add new user.
