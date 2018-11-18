@@ -4,15 +4,17 @@ contract LandRecord {
     address public creatorAdmin;
 
 	struct PropertyDetail {
-		uint aadhar;
-		int khataNo;
-		int khewatNo;
+	    uint aadhar;
+		uint khataNo;
+		uint khewatNo;
+		uint plotNo;
 		string fullAddress;
-		string landmark;
 		string state;
 		string zip;
-		uint value;
 		string area;
+		string size;
+		uint value;     // if value is 0 then property is not on sale and if its not then its on sale
+		// cant add more struct properties as stack too deep error will occur
 	}
 	
     struct User {
@@ -52,13 +54,13 @@ contract LandRecord {
         usersProperties[sender] = remove(sender, index);
     }
 
-    function addProperty(uint aadhar, int khataNo, int khewatNo, string fullAddress, string landmark, string state, string zip, uint value, string area) public returns (bool) {
+    function addProperty(uint aadhar, uint khataNo, uint khewatNo, uint plotNo, string fullAddress, string state, string zip, string area, string size) public returns (bool) {
         for (uint i = 0; i<properties.length; i++){
-            if (properties[i].khataNo == khataNo && properties[i].khewatNo == khewatNo) {
+            if (properties[i].khataNo == khataNo && properties[i].khewatNo == khewatNo && properties[i].plotNo == plotNo) {
                 return false;
             }
         }
-        uint length = properties.push(PropertyDetail(aadhar, khataNo, khewatNo, fullAddress, landmark, state, zip, value, area));
+        uint length = properties.push(PropertyDetail(aadhar, khataNo, khewatNo, plotNo, fullAddress, state, zip, area, size, 0));
         // users[aadhar].properties.push(length);
         usersProperties[aadhar].push(length);
         return true;
@@ -68,18 +70,91 @@ contract LandRecord {
         return usersProperties[aadhar].length;
     }
     
-    function getProperty(uint aadhar, uint index) returns (int,
-		int,
-		string,
-		string,
-		string,
-		string,
+    function getPropertiesCount() returns (uint) {
+        return properties.length;
+    }
+    
+    function getPropertyCountByArea(string area) returns (uint) {
+        uint length = properties.length;
+        uint count = 0;
+        for (uint i = 0; i < length; i++) {
+            bool result = stringsEqual(properties[i].area, area);
+            if (result == true) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    function getCountOfPropertyOnSaleByArea(string area) returns (uint) {
+        uint length = properties.length;
+        uint count = 0;
+        for (uint i = 0; i < length; i++) {
+            if (properties[i].value != 0 && stringsEqual(properties[i].area, area)) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    function getPropertyOnSaleByArea(string area, uint index) returns (
+        uint,
 		uint,
+		uint,
+		string,
+		string,
+		string,
+		string,
 		string
+	){
+        uint length = properties.length;
+        uint count = 0;
+        for (uint i = 0; i < length; i++) {
+            if (properties[i].value != 0 && stringsEqual(properties[i].area, area)) {
+                if (count == i) {
+                    PropertyDetail pd = properties[i];
+                    return (pd.khataNo, pd.khewatNo, pd.plotNo, pd.fullAddress, pd.state, pd.zip, pd.area, pd.size);
+                }
+                count++;
+            }
+        }
+    }
+    
+    function setUserPropertyOnSale(uint aadhar, uint index, uint value) returns (bool) {
+        uint propertyIndex = usersProperties[aadhar][index];
+        PropertyDetail pd = properties[propertyIndex - 1];
+        pd.value = value;
+        return true;
+    }
+    
+    function getProperty(uint index) returns (
+        uint,
+		uint,
+		uint,
+		string,
+		string,
+		string,
+		string,
+		string
+	){
+        PropertyDetail pd = properties[index];
+        return (pd.khataNo, pd.khewatNo, pd.plotNo, pd.fullAddress, pd.state, pd.zip, pd.area, pd.size);
+    }
+    
+    function getPropertyByAadhar(uint aadhar, uint index) returns (
+        uint,
+		uint,
+		uint,
+		string,
+		string,
+		string,
+		string,
+		string,
+		uint
 	){
         uint propertyIndex = usersProperties[aadhar][index];
         PropertyDetail pd = properties[propertyIndex - 1];
-        return (pd.khataNo, pd.khewatNo, pd.fullAddress, pd.landmark, pd.state, pd.zip, pd.value, pd.area);
+        return (pd.khataNo, pd.khewatNo, pd.plotNo, pd.fullAddress, pd.state, pd.zip, pd.area, pd.size, pd.value);
     }
     
 	// Add new user.

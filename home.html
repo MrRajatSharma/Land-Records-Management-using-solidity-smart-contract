@@ -33,6 +33,12 @@
           <li class="nav-item">
             <a class="nav-link" href="transfer.html">Transfer</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="search.html">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="logout">Logout</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -51,18 +57,25 @@
           <h4 class="mb-3">Property</h4>
           <form class="needs-validation" novalidate>
             <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-4 mb-3">
                 <label for="firstName">Khata Number</label>
                 <input type="number" class="form-control" id="khataNo" placeholder="eg. 1" value="" required>
                 <div class="invalid-feedback">
                   Valid Khata Number is required.
                 </div>
               </div>
-              <div class="col-md-6 mb-3">
+              <div class="col-md-4 mb-3">
                 <label for="firstName">Khewat Number</label>
                 <input type="number" class="form-control" id="khewatNo" placeholder="eg. 20" value="" required>
                 <div class="invalid-feedback">
                   Valid Khewat Number is required.
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="firstName">Plot Number</label>
+                <input type="number" class="form-control" id="plotNo" placeholder="eg. 20" value="" required>
+                <div class="invalid-feedback">
+                  Valid Plot Number is required.
                 </div>
               </div>
             </div>
@@ -75,11 +88,6 @@
               </div>
             </div>
 
-            <div class="mb-3">
-              <label for="address2">Landmark <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="landmark" placeholder="eg. Near water tank">
-            </div>
-
             <div class="row">
               <div class="col-md-4 mb-3">
                 <label for="state">State</label>
@@ -90,18 +98,25 @@
                   Please provide a valid state.
                 </div>
               </div>
-              <div class="col-md-3 mb-3">
+              <div class="col-md-4 mb-3">
                 <label for="zip">Zip</label>
                 <input type="text" class="form-control" id="zip" placeholder="" required>
                 <div class="invalid-feedback">
                   Zip code required.
                 </div>
               </div>
-              <div class="col-md-3 mb-3">
+              <div class="col-md-4 mb-3">
                 <label for="area">Area</label>
-                <input type="text" class="form-control" id="area" placeholder="" required>
+                <input type="text" class="form-control" id="area" placeholder="eg. Janipur" required>
                 <div class="invalid-feedback">
-                  Area size required.
+                  Area required.
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="area">Land Size</label>
+                <input type="text" class="form-control" id="size" placeholder="eg 10000 sq ft" required>
+                <div class="invalid-feedback">
+                  Size required.
                 </div>
               </div>
             </div>
@@ -138,6 +153,10 @@
         'use strict';
 
         window.addEventListener('load', function() {
+          if (!sessionStorage.aadhar) {
+            console.log("Unauthenticated");
+            location.href = "login.html";
+          }
           // Fetch all the forms we want to apply custom Bootstrap validation styles to
           var forms = document.getElementsByClassName('needs-validation');
 
