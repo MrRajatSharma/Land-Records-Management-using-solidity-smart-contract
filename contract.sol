@@ -26,6 +26,17 @@ contract LandRecord {
         address accountAddress;
     }
     
+    struct Tx {
+        uint propertyId;
+        uint sender;
+        string senderName;
+        uint receiver;
+        string receiverName;
+        uint value;
+    }
+    
+    // list of all transfers between users
+    Tx[] tx;
     
     // int[][] usersProperties;
 	PropertyDetail[] public properties;
@@ -41,7 +52,7 @@ contract LandRecord {
     function remove(uint aadhar, uint index)  returns(uint[]) {
         if (index >= usersProperties[aadhar].length) return;
 
-        for (uint i = index; i<usersProperties[aadhar].length-1; i++){
+        for (uint i = index; i<usersProperties[aadhar].length-1; i++) {
             usersProperties[aadhar][i] = usersProperties[aadhar][i+1];
         }
         delete usersProperties[aadhar][usersProperties[aadhar].length-1];
@@ -50,7 +61,10 @@ contract LandRecord {
     }
     
     function transfer(uint sender, uint recipient, uint index) {
-        usersProperties[recipient].push(usersProperties[sender][index]);
+        uint propertyId = usersProperties[sender][index];
+        tx.push(Tx(propertyId, sender, users[sender].name, recipient, users[recipient].name, properties[propertyId - 1].value));
+        
+        usersProperties[recipient].push(propertyId);
         usersProperties[sender] = remove(sender, index);
     }
 
@@ -64,6 +78,21 @@ contract LandRecord {
         // users[aadhar].properties.push(length);
         usersProperties[aadhar].push(length);
         return true;
+    }
+    
+    function getTotalTx() returns (uint) {
+        return tx.length;
+    }
+    
+    function getTx(uint index) returns (
+        uint,
+        string,
+        uint,
+        string,
+        uint
+	){
+	    Tx txx = tx[index];
+        return (txx.sender, txx.senderName, txx.receiver, txx.receiverName, txx.value);
     }
     
     function getTotalProperties(uint aadhar) returns (uint) {
