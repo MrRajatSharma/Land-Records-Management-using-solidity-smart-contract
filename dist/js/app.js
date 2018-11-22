@@ -965,6 +965,32 @@ App = {
 		});
 
 	},
+	getAllTransfers() {
+		App.contracts.asset.methods.getTotalTx().call(function (error, result) {
+			if (!error) {
+				for (let i = 0; i < result; i++) {
+					App.contracts.asset.methods.getTx(i).call(function (error, property) {
+						// add to html
+						console.log(property);
+						$("#tBody").append(
+							`<tr>
+								<td>${i + 1}</td>
+								<td>${property["0"]}</td>
+								<td>${property["1"]}</td>
+								<td>${property["2"]}</td>
+								<td>${property["3"]}</td>
+								<td>${property["4"]}</td>
+							</tr>`
+						)
+					});
+				}
+				console.log('getCountOfPropertyOnSaleByArea res', result);
+			}
+			else {
+				console.error('getCountOfPropertyOnSaleByArea err', error);
+			}
+		});
+	},
 	getAllSellingProperties() {
 		App.contracts.asset.methods.getCountOfPropertyOnSale().call(function (error, result) {
 			if (!error) {

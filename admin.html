@@ -48,13 +48,10 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Khata Number</th>
-                <th scope="col">Khewat Number</th>
-                <th scope="col">Plot Number</th>
-                <th scope="col">Address</th>
-                <th scope="col">State code</th>
-                <th scope="col">Area</th>
-                <th scope="col">Size</th>
+                <th scope="col">Sender Aadhar</th>
+                <th scope="col">Sender Name</th>
+                <th scope="col">Recipient Aadhar</th>
+                <th scope="col">Recipient Name</th>
                 <th scope="col">Price</th>
               </tr>
             </thead>
@@ -91,7 +88,7 @@
         'use strict';
 
         window.addEventListener('load', function () {
-          App.getAllSellingProperties();
+          App.getAllTransfers();
         }, false);
       })();
   </script>
